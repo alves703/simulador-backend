@@ -1,0 +1,11 @@
+const fs = require('fs');
+const { google } = require('googleapis');
+
+const keyFilePath = '/tmp/google-creds.json';
+const base64Creds = process.env.GOOGLE_CREDENTIALS_BASE64;
+fs.writeFileSync(keyFilePath, Buffer.from(base64Creds, 'base64'));
+
+const auth = new google.auth.GoogleAuth({
+  keyFile: keyFilePath,
+  scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+});
